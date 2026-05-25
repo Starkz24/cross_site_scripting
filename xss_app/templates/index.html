@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cross Site Scripting Demo</title>
+</head>
+
+<body>
+
+    <h1>Cross Site Scripting (XSS)</h1>
+
+    <form method="POST" action="nameRef/">
+
+        {% csrf_token %}
+
+        <label>Enter Your Name:</label>
+
+        <input type="text" name="name">
+
+        <input type="submit" value="Submit">
+
+    </form>
+
+</body>
+</html>

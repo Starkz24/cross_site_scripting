@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-import html
 
 
 def index(request):
@@ -16,20 +15,16 @@ def nameRef(request):
         if not name:
             return HttpResponse("Please enter your name.")
 
-        # Vulnerable Output
-        vulnerable_output = f"""
-        <h2>Vulnerable Output:</h2>
-        Hello {name}
-        """
+        name1 = name.lower()
 
-        # Secure Output
-        safe_name = html.escape(name)
+        if "script" in name1:
 
-        secure_output = f"""
-        <h2>Secure Output:</h2>
-        Hello {safe_name}
-        """
+            name2 = name1.replace("script", "")
 
-        return HttpResponse(vulnerable_output + "<hr>" + secure_output)
+            return HttpResponse(name2)
 
-    return HttpResponse("Invalid Request")
+        else:
+            return HttpResponse(name1)
+
+    else:
+        return HttpResponse("Please Enter your name.")
